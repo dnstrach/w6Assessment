@@ -117,8 +117,11 @@ const putBotBack = (id) => {
     }
 }
 
+const localBaseURL = 'http://localhost:4000/'
+const EC2BaseURL = 'http://ec2-18-237-196-99.us-west-2.compute.amazonaws.com/'
+
 const drawFive = () => {
-    axios.get('http://localhost:4000/api/robots/five')
+    axios.get('http://ec2-18-237-196-99.us-west-2.compute.amazonaws.com/api/robots/five')
         .then(res => {
             choices = res.data.choices
             compDuo = res.data.compDuo
@@ -135,7 +138,7 @@ const duel = () => {
     renderCompDuo()
     document.querySelectorAll('.bot-btn').forEach(btn => btn.classList.add('hide'))
     setTimeout(() => {
-        axios.post('http://localhost:4000/api/duel', {compDuo, playerDuo})
+        axios.post('http://ec2-18-237-196-99.us-west-2.compute.amazonaws.com/api/duel', {compDuo, playerDuo})
             .then(({data}) => {
                 resultsText.textContent = data
                 playAgainBtn.classList.remove('hide')
@@ -157,11 +160,8 @@ const reset = () => {
     compDuoHeader.classList.add('hide')
 }
 
-const localBaseURL = 'http://localhost:4000/'
-const EC2BaseURL = ''
-
 const getPlayerStats = () => {
-    axios.get('http://localhost:4000/api/player')
+    axios.get('http://ec2-18-237-196-99.us-west-2.compute.amazonaws.com/api/player')
         .then(({data: {wins, losses}}) => {
             winsText.textContent = `Wins: ${wins}`
             lossesTest.textContent = `Losses: ${losses}`
@@ -169,7 +169,7 @@ const getPlayerStats = () => {
 }
 
 const getAllBots = () => {
-    axios.get('http://localhost:4000/api/robots')
+    axios.get('http://ec2-18-237-196-99.us-west-2.compute.amazonaws.com/api/robots')
         .then(({data}) => {
             allBotsDiv.innerHTML = ''
         
