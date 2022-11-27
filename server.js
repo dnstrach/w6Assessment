@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const {bots, playerRecord} = require('./data')
 const {shuffleArray} = require('./utils')
@@ -6,6 +7,7 @@ const {shuffleArray} = require('./utils')
 app.use(express.static(`${__dirname}/public`))
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/api/robots', (req, res) => {
     try {
@@ -68,6 +70,6 @@ app.get('/api/player', (req, res) => {
     }
 })
 
-app.listen(4000, () => {
-  console.log(`Listening on 4000`)
+app.listen(5555, () => {
+  console.log(`Listening on 5555`)
 })

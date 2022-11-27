@@ -1,7 +1,7 @@
 const {shuffleArray} = require('./utils')
 
 describe('shuffleArray should', () => {
-    const expected = ['M', 'O', 'D']
+    let expected = ['M', 'O', 'D']
     test('return an array with the same items', () => {
         expect(shuffleArray(['D', 'O', 'M'])).toEqual(expect.arrayContaining(expected))
     });
@@ -10,9 +10,15 @@ describe('shuffleArray should', () => {
         expect(shuffleArray(['dom', 'ini', 'que'])).toHaveLength(3)
     });
 
-    test('return an aray', () => {
+    test('return an array', () => {
         expect(shuffleArray([])).toEqual([])
+    });
+
+    test('should shuffle array of items', () => {
+        let myArray = [1, 2, 3, 4, 5]
+        let result = shuffleArray(myArray)
+
+        expect(result.join()).not.toEqual(myArray.join())
     })
 })
 
-//how to check that items have been shuffled around

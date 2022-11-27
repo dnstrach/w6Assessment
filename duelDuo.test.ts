@@ -5,46 +5,43 @@ require('chromedriver')
 
 const driver = new Builder().withCapabilities(Capabilities.chrome()).build()
 
-// beforeEach(async () => {
-//     driver.get('http://localhost:3000/')
-// })
-
-// afterAll(async () => {
-//     driver.quit()
-// })
-
-// test('Title shows up when page loads', async () => {
-//     const title = await driver.findElement(By.id('title'))
-//     const displayed = await title.isDisplayed()
-//     expect(displayed).toBe(true)
-// })
-
-beforeAll(async () => {
-    driver.get('http://127.0.0.1:5500/public/index.html')
+beforeEach(async () => {
+    driver.get('http://localhost:4000/')
 })
 
 afterAll(async () => {
     driver.quit()
 })
 
-describe ('testing duel duo', () => {
-    test('draw button', async () => { 
-        await driver.findElement(By.xpath('//button[@id="draw"]')).click()
+test('Title shows up when page loads', async () => {
+    const title = await driver.findElement(By.id('title'))
 
-        const displayed = await driver.findElement(By.xpath('//div[@id="choices"]'))
+    await driver.sleep(2000)
 
-        expect(displayed).toBeTruthy
+    const displayed = await title.isDisplayed()
 
-    });
+    expect(displayed).toBe(true)
+})
 
-    test('add duo button', async () => {
-        await driver.findElement(By.xpath('//button[@id="draw"]')).click()
+test('draw button ', async () => { 
+    await driver.findElement(By.xpath('//button[@id="draw"]')).click()
 
-        await driver.findElement(By.xpath('//button[text(), "Add to Duo"]')).click()
+    await driver.sleep(2000)
 
-        const displayed = await driver.findElement(By.xpath('//div[text()="player-duo"]'))
+    const displayed = await driver.findElement(By.xpath('//div[@id="choices"]'))
 
-        expect(displayed).toBeTruthy
+    expect(displayed).toBeTruthy()
 
-    })
+})
+
+test('add duo button', async () => {
+    await driver.findElement(By.xpath('//button[@id="draw"]')).click()
+
+    await driver.findElement(By.xpath('//button[@onclick="chooseBot (3)"]')).click()
+    //can't find a way to click add to duo button
+
+    const displayed = await driver.findElement(By.xpath('//div[text()="player-duo"]'))
+
+    expect(displayed).toBeTruthy()
+
 })
